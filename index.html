@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐼 2026 四川重慶 9天旅遊規劃</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --card: #ffffff;
+    --accent: #e74c3c;
+    --accent2: #2ecc71;
+    --accent3: #3498db;
+    --accent4: #f39c12;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --border: #ecf0f1;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 60px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff10" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>') no-repeat bottom;
+    background-size: cover;
+  }
+  .hero h1 { font-size: 2.2em; position: relative; z-index: 1; }
+  .hero .subtitle { font-size: 1.1em; opacity: 0.85; margin-top: 8px; position: relative; z-index: 1; }
+  .hero .dates {
+    display: inline-block; margin-top: 16px; padding: 8px 24px;
+    background: rgba(255,255,255,0.15); border-radius: 30px;
+    font-size: 0.95em; position: relative; z-index: 1; backdrop-filter: blur(4px);
+  }
+
+  /* Nav tabs */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: white; border-bottom: 1px solid var(--border);
+    display: flex; overflow-x: auto; padding: 0 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .nav-bar button {
+    flex-shrink: 0; padding: 14px 18px; border: none; background: none;
+    font-size: 0.9em; color: var(--muted); cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .nav-bar button:hover { color: var(--text); }
+  .nav-bar button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+  /* Main */
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 80px; }
+
+  /* Section */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Day card */
+  .day-card {
+    background: var(--card); border-radius: 16px; margin-bottom: 20px;
+    box-shadow: var(--shadow); overflow: hidden;
+    border-left: 5px solid var(--accent3);
+  }
+  .day-header {
+    padding: 16px 20px; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    transition: background 0.2s;
+  }
+  .day-header:hover { background: #f8f9fa; }
+  .day-num {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .day-num .d { font-size: 1.3em; line-height: 1; }
+  .day-num .m { font-size: 0.65em; opacity: 0.9; }
+  .day-info { flex: 1; }
+  .day-info .title { font-size: 1.1em; font-weight: 600; }
+  .day-info .city-tag {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 0.75em; font-weight: 500; margin-top: 4px;
+  }
+  .day-toggle { font-size: 1.2em; transition: transform 0.3s; color: var(--muted); }
+  .day-card.open .day-toggle { transform: rotate(180deg); }
+  .day-body { padding: 0 20px 20px; display: none; }
+  .day-card.open .day-body { display: block; }
+
+  /* Timeline items */
+  .timeline { padding-left: 20px; border-left: 2px solid var(--border); }
+  .timeline-item { position: relative; padding: 0 0 20px 20px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -8px; top: 4px;
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 3px solid var(--accent3); background: white;
+  }
+  .timeline-item .time { font-size: 0.8em; color: var(--accent); font-weight: 600; }
+  .timeline-item .desc { margin-top: 4px; font-size: 0.95em; }
+  .timeline-item .detail { margin-top: 4px; font-size: 0.85em; color: var(--muted); }
+
+  /* Hotel section */
+  .hotel-card {
+    background: var(--card); border-radius: 16px; margin-bottom: 20px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .hotel-city-header {
+    padding: 16px 20px; font-weight: 700; font-size: 1.1em;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hotel-city-header .nights {
+    font-size: 0.75em; font-weight: 500; padding: 3px 10px;
+    border-radius: 12px; background: #eef7ff; color: var(--accent3);
+  }
+  .hotel-option {
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .hotel-option:last-child { border-bottom: none; }
+  .hotel-option:hover { background: #fafbfc; }
+  .hotel-rank {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85em; flex-shrink: 0;
+    background: #f0f0f0; color: var(--muted);
+  }
+  .hotel-rank.top { background: var(--accent4); color: white; }
+  .hotel-details { flex: 1; }
+  .hotel-name { font-weight: 600; font-size: 1em; }
+  .hotel-meta { font-size: 0.85em; color: var(--muted); margin-top: 4px; }
+  .hotel-price {
+    text-align: right; flex-shrink: 0;
+  }
+  .hotel-price .price { font-weight: 700; color: var(--accent); font-size: 1.1em; }
+  .hotel-price .unit { font-size: 0.75em; color: var(--muted); }
+
+  /* Vote buttons */
+  .vote-row { display: flex; gap: 8px; margin-top: 8px; }
+  .vote-btn {
+    padding: 4px 14px; border-radius: 20px; border: 1.5px solid var(--border);
+    background: white; cursor: pointer; font-size: 0.8em; font-family: inherit;
+    transition: all 0.2s; display: flex; align-items: center; gap: 4px;
+  }
+  .vote-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .vote-btn.voted { background: var(--accent3); color: white; border-color: var(--accent3); }
+  .vote-btn .count { font-weight: 700; }
+
+  /* Budget */
+  .budget-table {
+    width: 100%; border-collapse: collapse; margin-top: 12px;
+    font-size: 0.9em;
+  }
+  .budget-table th, .budget-table td {
+    padding: 12px 16px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .budget-table th { font-weight: 600; color: var(--muted); font-size: 0.85em; }
+  .budget-table tr:last-child td { border-bottom: none; font-weight: 700; }
+  .budget-total { background: #f8f9fa; border-radius: 12px; }
+
+  /* Progress bar */
+  .budget-bar {
+    height: 8px; background: #eee; border-radius: 4px; margin-top: 12px; overflow: hidden;
+  }
+  .budget-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+  /* Discussion */
+  .discussion-box {
+    background: var(--card); border-radius: 16px; box-shadow: var(--shadow);
+    overflow: hidden; margin-bottom: 20px;
+  }
+  .discussion-header {
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    font-weight: 600; display: flex; align-items: center; gap: 8px;
+  }
+  .message-list { max-height: 500px; overflow-y: auto; padding: 12px 20px; }
+  .message {
+    margin-bottom: 16px; display: flex; gap: 10px;
+  }
+  .message .avatar {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85em; font-weight: 700; color: white;
+  }
+  .message .bubble {
+    background: #f0f2f5; border-radius: 0 16px 16px 16px;
+    padding: 10px 14px; max-width: 80%; font-size: 0.9em;
+  }
+  .message .bubble .name { font-weight: 600; font-size: 0.8em; margin-bottom: 4px; }
+  .message .bubble .time-stamp { font-size: 0.7em; color: var(--muted); margin-top: 4px; }
+  .message-input {
+    display: flex; gap: 10px; padding: 12px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .message-input select {
+    padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: inherit; font-size: 0.85em; background: white;
+  }
+  .message-input input {
+    flex: 1; padding: 10px 16px; border: 1.5px solid var(--border);
+    border-radius: 24px; font-size: 0.9em; outline: none; font-family: inherit;
+  }
+  .message-input input:focus { border-color: var(--accent3); }
+  .message-input button {
+    padding: 10px 20px; background: var(--accent3); color: white;
+    border: none; border-radius: 24px; cursor: pointer; font-family: inherit;
+    font-weight: 600; transition: background 0.2s;
+  }
+  .message-input button:hover { background: #2980b9; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px; font-size: 0.9em;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    width: 20px; height: 20px; accent-color: var(--accent3); cursor: pointer;
+  }
+  .checklist .done { text-decoration: line-through; color: var(--muted); }
+
+  /* Tip box */
+  .tip-box {
+    background: #fff8e1; border-radius: 12px; padding: 14px 18px;
+    margin-top: 16px; font-size: 0.85em; border-left: 4px solid var(--accent4);
+  }
+
+  /* Summary cards */
+  .summary-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin: 20px 0;
+  }
+  .summary-card {
+    background: var(--card); border-radius: 12px; padding: 16px;
+    text-align: center; box-shadow: var(--shadow);
+  }
+  .summary-card .num { font-size: 1.8em; font-weight: 700; }
+  .summary-card .label { font-size: 0.8em; color: var(--muted); margin-top: 4px; }
+
+  /* Color helpers */
+  .bg-chengdu { background: #e74c3c; }
+  .bg-yibin { background: #2ecc71; }
+  .bg-chongqing { background: #3498db; }
+  .bg-siguniang { background: #9b59b6; }
+  .tag-chengdu { background: #fde8e8; color: #c0392b; }
+  .tag-yibin { background: #e8f8f0; color: #27ae60; }
+  .tag-chongqing { background: #e8f0fe; color: #2980b9; }
+  .tag-siguniang { background: #f0e6f8; color: #8e44ad; }
+  .border-chengdu { border-left-color: #e74c3c; }
+  .border-yibin { border-left-color: #2ecc71; }
+  .border-chongqing { border-left-color: #3498db; }
+  .border-siguniang { border-left-color: #9b59b6; }
+  .border-transit { border-left-color: #95a5a6; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6em; }
+    .hotel-option { flex-direction: column; gap: 8px; }
+    .hotel-price { text-align: left; }
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Print */
+  @media print {
+    .nav-bar, .message-input, .vote-btn, .discussion-box { display: none !important; }
+    .section { display: block !important; }
+    .day-body { display: block !important; }
+    .day-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🐼 四川・重慶 9 天之旅</h1>
+  <div class="subtitle">成都 → 都江堰 → 宜賓李莊 → 重慶 → 四姑娘山</div>
+  <div class="dates">2026 / 6 / 17（三）～ 6 / 25（四）・4 位旅伴</div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="active" onclick="showSection('itinerary',this)">行程總覽</button>
+  <button onclick="showSection('hotels',this)">住宿方案</button>
+  <button onclick="showSection('budget',this)">預算試算</button>
+  <button onclick="showSection('checklist',this)">行前準備</button>
+  <button onclick="showSection('discuss',this)">討論區</button>
+</div>
+
+<div class="container">
+
+<!-- ==================== 行程總覽 ==================== -->
+<div class="section active" id="itinerary">
+
+  <div class="summary-row">
+    <div class="summary-card"><div class="num">9</div><div class="label">天</div></div>
+    <div class="summary-card"><div class="num">4</div><div class="label">城市</div></div>
+    <div class="summary-card"><div class="num">4</div><div class="label">旅伴</div></div>
+    <div class="summary-card"><div class="num">8</div><div class="label">晚住宿</div></div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card border-chengdu" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chengdu"><span class="d">17</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">抵達成都</div>
+        <span class="city-tag tag-chengdu">成都</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">18:35</div>
+          <div class="desc">台北松山機場出發</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">21:55</div>
+          <div class="desc">抵達成都天府國際機場</div>
+          <div class="detail">抵達後直接前往市區飯店入住休息</div>
+        </div>
+      </div>
+      <div class="tip-box">💡 天府機場到市區約 1-1.5 小時車程，建議提前叫車或訂接機服務</div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card border-chengdu" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chengdu"><span class="d">18</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">成都悠閒時光 & 蜀宴賦宮廷宴</div>
+        <span class="city-tag tag-chengdu">成都</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">寬窄巷子</div>
+          <div class="detail">清晨漫步清朝遺留下來的古街道與四合院，感受青磚灰瓦的古樸世界</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午</div>
+          <div class="desc">成都人民公園</div>
+          <div class="detail">喝蓋碗茶、看川劇變臉與長嘴壺倒茶表演，體驗成都人「擺龍門陣」的悠閒</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">晚上</div>
+          <div class="desc">🌟 蜀宴賦（宮廷宴）</div>
+          <div class="detail">沉浸式華麗視覺與味覺饗宴體驗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card border-chengdu" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chengdu"><span class="d">19</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">大熊貓 & 都江堰水利奇蹟</div>
+        <span class="city-tag tag-chengdu">成都・都江堰</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">🐼 都江堰中華大熊貓苑</div>
+          <div class="detail">距市區約 70 公里，在冷箭竹林中近距離觀賞大熊貓</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午</div>
+          <div class="desc">都江堰景區</div>
+          <div class="detail">參觀李冰父子西元前 256 年修建的水利工程，看「魚嘴」與「寶瓶口」</div>
+        </div>
+      </div>
+      <div class="tip-box">💡 建議包車前往，來回含景區遊覽約需一整天</div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card border-yibin" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-yibin"><span class="d">20</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">李莊古鎮 & 美食三絕</div>
+        <span class="city-tag tag-yibin">宜賓</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">🚄 成都 → 宜賓（高鐵約 1.5-2 小時）</div>
+          <div class="detail">寄放大行李在成都飯店，帶小行李輕裝出發</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午～晚上</div>
+          <div class="desc">🏮 李莊古鎮 — 萬里長江第一古鎮</div>
+          <div class="detail">必吃「美食三絕」：李莊刀口蒜泥白肉（薄如紙片）、白糕、白酒。抗戰時期大後方文化中心</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card border-chongqing" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chongqing"><span class="d">21</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">8D 魔幻之都 — 重慶</div>
+        <span class="city-tag tag-chongqing">重慶</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">🚄 宜賓 → 重慶（高鐵）</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午</div>
+          <div class="desc">十八梯</div>
+          <div class="detail">連接上下半城的通道，感受六七十年代老城區的市井煙火氣</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">晚上</div>
+          <div class="desc">🌙 洪崖洞夜景 & 重慶火鍋</div>
+          <div class="detail">懸崖上金色宮殿般的洪崖洞；正宗牛油花椒火鍋，必點毛肚、鴨腸、鴨血</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day-card border-chongqing" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chongqing"><span class="d">22</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">磁器口古鎮 & 老君洞全景</div>
+        <span class="city-tag tag-chongqing">重慶 → 成都</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">磁器口古鎮</div>
+          <div class="detail">千年石板路、42 條交錯巷道，品嚐干香酥脆的麻花</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午</div>
+          <div class="desc">老君洞</div>
+          <div class="detail">千年道觀，俯瞰重慶全景 — 長江嘉陵江交匯處與來福士</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">晚上</div>
+          <div class="desc">🚄 重慶 → 成都（高鐵）</div>
+          <div class="detail">回到成都飯店，取回行李休息</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day-card border-siguniang" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-siguniang"><span class="d">23</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">川西秘境 — 四姑娘山</div>
+        <span class="city-tag tag-siguniang">四姑娘山</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">全天</div>
+          <div class="desc">🏔️ 四姑娘山（距成都約 190 公里）</div>
+          <div class="detail">六月野花盛開，巍峨雪山、翠綠高山草地與清澈溪流，遠離都市喧囂</div>
+        </div>
+      </div>
+      <div class="tip-box">⚠️ 海拔 3,200m，注意高原反應。建議慢走、多喝水、不要劇烈運動。可提前服用紅景天</div>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day-card border-chengdu" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num bg-chengdu"><span class="d">24</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">春熙路太古里 & 伴手禮</div>
+        <span class="city-tag tag-chengdu">成都</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">上午</div>
+          <div class="desc">春熙路太古里</div>
+          <div class="detail">大熊貓雕塑、3D 動畫螢幕打卡拍照，感受時尚與活力</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">下午</div>
+          <div class="desc">伴手禮採購 & 大慈寺</div>
+          <div class="detail">現代商圈與僅一牆之隔的千年古寺，感受古典與現代的奇妙融合</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day-card border-transit" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num" style="background:#95a5a6"><span class="d">25</span><span class="m">6月</span></div>
+      <div class="day-info">
+        <div class="title">賦歸 ✈️</div>
+        <span class="city-tag" style="background:#eee;color:#666">返台</span>
+      </div>
+      <span class="day-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">13:55</div>
+          <div class="desc">成都天府機場 → 香港（CX987）</div>
+          <div class="detail">16:50 抵達香港轉機，行李可直掛</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">18:15</div>
+          <div class="desc">香港 → 台灣桃園（CX402）</div>
+          <div class="detail">20:05 平安抵達桃園國際機場</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== 住宿方案 ==================== -->
+<div class="section" id="hotels">
+
+  <div class="tip-box" style="margin-bottom:20px;">
+    💡 <strong>省錢策略：</strong>成都住同一間飯店（5晚），外出期間行李寄放。每晚預算 ≈ NT$5,000（¥1,100）訂 2 間雙人房。點擊「👍」為喜歡的飯店投票！
+  </div>
+
+  <!-- Chengdu -->
+  <div class="hotel-card">
+    <div class="hotel-city-header">
+      <span style="font-size:1.3em">🏙️</span> 成都
+      <span class="nights">5 晚：6/17-19, 6/22, 6/24</span>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank top">1</div>
+      <div class="hotel-details">
+        <div class="hotel-name">全季成都春熙路太古里酒店</div>
+        <div class="hotel-meta">距春熙路地鐵站 30 米 ・ 有熊貓基地直通車 ・ 連住可談折扣</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥700-900</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank">2</div>
+      <div class="hotel-details">
+        <div class="hotel-name">成都太古里春熙城際酒店</div>
+        <div class="hotel-meta">春熙路景觀房 ・ 免費咖啡 ・ 服務評價高</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥900-1,100</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank">3</div>
+      <div class="hotel-details">
+        <div class="hotel-name">成都太古里春熙美居酒店</div>
+        <div class="hotel-meta">Accor 品牌 ・ 房間 32-36㎡ 寬敞 ・ 品質穩定</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥800-1,000</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Yibin -->
+  <div class="hotel-card">
+    <div class="hotel-city-header">
+      <span style="font-size:1.3em">🏮</span> 宜賓・李莊
+      <span class="nights">1 晚：6/20</span>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank top">1</div>
+      <div class="hotel-details">
+        <div class="hotel-name">李莊古鎮璞宿小院</div>
+        <div class="hotel-meta">古鎮內 ・ 攜程 4.6 分 ・ 庭院風格 ・ 夜晚古鎮氛圍佳</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥500-700</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank">2</div>
+      <div class="hotel-details">
+        <div class="hotel-name">李莊安石半丘塘民宿</div>
+        <div class="hotel-meta">田園風格 ・ 有家庭連通房 ・ 可圍爐小聚</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥600-800</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chongqing -->
+  <div class="hotel-card">
+    <div class="hotel-city-header">
+      <span style="font-size:1.3em">🌃</span> 重慶
+      <span class="nights">1 晚：6/21</span>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank top">1</div>
+      <div class="hotel-details">
+        <div class="hotel-name">江島假日高空酒店（解放碑洪崖洞店）</div>
+        <div class="hotel-meta">地鐵小什字站步行 3 分鐘 ・ 有觀景房 ・ 看夜景方便</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥800-1,000</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank">2</div>
+      <div class="hotel-details">
+        <div class="hotel-name">希爾頓歡朋（解放碑洪崖洞江景店）</div>
+        <div class="hotel-meta">國際品牌 ・ 江景房可看洪崖洞 ・ 品質有保障</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥1,000-1,200</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Siguniang -->
+  <div class="hotel-card">
+    <div class="hotel-city-header">
+      <span style="font-size:1.3em">🏔️</span> 四姑娘山・日隆鎮
+      <span class="nights">1 晚：6/23</span>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank top">1</div>
+      <div class="hotel-details">
+        <div class="hotel-name">四姑娘山觀山印相客棧</div>
+        <div class="hotel-meta">地暖 ・ WiFi ・ 提供登山諮詢 ・ 在地體驗感強</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥800-1,000</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+    <div class="hotel-option">
+      <div class="hotel-rank">2</div>
+      <div class="hotel-details">
+        <div class="hotel-name">四姑娘山悅山度假酒店</div>
+        <div class="hotel-meta">星空房 ・ 山景房 ・ 音樂酒吧 ・ 茶室</div>
+        <div class="vote-row">
+          <button class="vote-btn" onclick="vote(this,event)">👍 <span class="count">0</span></button>
+          <button class="vote-btn" onclick="vote(this,event)">🤔 再看看 <span class="count">0</span></button>
+        </div>
+      </div>
+      <div class="hotel-price">
+        <div class="price">¥1,000-1,200</div>
+        <div class="unit">2間/晚</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 預算試算 ==================== -->
+<div class="section" id="budget">
+
+  <div class="hotel-card">
+    <div class="hotel-city-header">💰 住宿預算試算（2 間雙人房/晚）</div>
+    <div style="padding:20px;">
+      <table class="budget-table">
+        <thead>
+          <tr><th>城市</th><th>晚數</th><th>預估/晚 (¥)</th><th>小計 (¥)</th><th>小計 (NT$)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🏙️ 成都</td><td>5</td><td>800</td><td>4,000</td><td>18,000</td></tr>
+          <tr><td>🏮 宜賓</td><td>1</td><td>650</td><td>650</td><td>2,925</td></tr>
+          <tr><td>🌃 重慶</td><td>1</td><td>1,000</td><td>1,000</td><td>4,500</td></tr>
+          <tr><td>🏔️ 四姑娘山</td><td>1</td><td>1,000</td><td>1,000</td><td>4,500</td></tr>
+          <tr class="budget-total"><td>合計</td><td>8 晚</td><td></td><td>¥6,650</td><td>NT$29,925</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:20px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.85em;margin-bottom:6px;">
+          <span>已使用預算</span>
+          <span><strong>NT$29,925</strong> / NT$40,000（每晚 5,000 × 8）</span>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-bar-fill" style="width:74.8%;background:linear-gradient(90deg,var(--accent2),var(--accent3))"></div>
+        </div>
+        <div style="text-align:right;font-size:0.85em;color:var(--accent2);margin-top:6px;">
+          ✅ 預算內！剩餘約 NT$10,075 可彈性使用
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>每人分攤：</strong><br>
+        住宿 8 晚合計 ≈ NT$29,925 ÷ 4 人 ≈ <strong>NT$7,481/人</strong><br>
+        平均每人每晚 ≈ NT$935
+      </div>
+    </div>
+  </div>
+
+  <div class="hotel-card">
+    <div class="hotel-city-header">🚄 交通預估</div>
+    <div style="padding:20px;">
+      <table class="budget-table">
+        <thead>
+          <tr><th>交通項目</th><th>預估費用 (¥)</th><th>NT$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>天府機場 → 市區（接機）</td><td>200-300</td><td>900-1,350</td></tr>
+          <tr><td>成都 → 都江堰（包車來回）</td><td>400-600</td><td>1,800-2,700</td></tr>
+          <tr><td>成都 → 宜賓（高鐵）× 4 人</td><td>600-800</td><td>2,700-3,600</td></tr>
+          <tr><td>宜賓 → 重慶（高鐵）× 4 人</td><td>500-700</td><td>2,250-3,150</td></tr>
+          <tr><td>重慶 → 成都（高鐵）× 4 人</td><td>800-1,000</td><td>3,600-4,500</td></tr>
+          <tr><td>成都 ⇄ 四姑娘山（包車 2 天）</td><td>1,200-1,600</td><td>5,400-7,200</td></tr>
+          <tr><td>市區交通（地鐵/打車/共 9 天）</td><td>400-600</td><td>1,800-2,700</td></tr>
+          <tr class="budget-total"><td>交通合計</td><td>¥4,100-5,600</td><td>NT$18,450-25,200</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box">
+        <strong>每人交通：</strong>≈ NT$4,600-6,300/人（全程 9 天）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 行前準備 ==================== -->
+<div class="section" id="checklist">
+  <div class="hotel-card">
+    <div class="hotel-city-header">✅ 行前準備清單</div>
+    <div style="padding:16px 20px;">
+      <h3 style="margin:8px 0;font-size:0.95em;color:var(--accent);">📋 證件與預訂</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>台胞證（確認有效期）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>機票確認（去程松山→天府、回程天府→香港→桃園）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>成都飯店預訂（5 晚）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>宜賓/李莊住宿預訂（1 晚）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>重慶飯店預訂（1 晚）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>四姑娘山住宿預訂（1 晚）⚠️ 旺季提早訂</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>蜀宴賦宮廷宴預約（6/18 晚）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>高鐵票預購（成都→宜賓→重慶→成都）</span></li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;font-size:0.95em;color:var(--accent);">💳 錢與通訊</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>人民幣現金（建議換 ¥3,000-5,000）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>開通微信支付 or 支付寶（大陸消費必備）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>中國上網 SIM 卡 / eSIM / WiFi 分享器</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>VPN 工具（使用 LINE、Google 需要）</span></li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;font-size:0.95em;color:var(--accent);">🎒 行李重點</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>舒適好走的鞋（古鎮石板路 + 四姑娘山步道）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>防曬用品（六月四川紫外線強）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>薄外套/衝鋒衣（四姑娘山海拔高、早晚涼）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>雨具（六月是雨季）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>高原反應藥物（紅景天，出發前一週開始吃）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>腸胃藥（川菜辣度驚人）</span></li>
+        <li><input type="checkbox" onchange="toggleDone(this)"><span>小行李袋（宜賓-重慶-四姑娘山輕裝用）</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 討論區 ==================== -->
+<div class="section" id="discuss">
+  <div class="discussion-box">
+    <div class="discussion-header">💬 旅伴討論區</div>
+    <div class="message-list" id="messageList">
+      <div class="message">
+        <div class="avatar" style="background:#e74c3c">系</div>
+        <div class="bubble">
+          <div class="name">系統訊息</div>
+          歡迎來到討論區！選擇你的名字，開始討論行程和住宿吧 😊
+          <div class="time-stamp">系統</div>
+        </div>
+      </div>
+    </div>
+    <div class="message-input">
+      <select id="userName">
+        <option value="志誠">志誠</option>
+        <option value="雅萍">雅萍</option>
+        <option value="冠宇">冠宇</option>
+        <option value="冠霖">冠霖</option>
+      </select>
+      <input type="text" id="messageInput" placeholder="輸入討論內容..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button onclick="sendMessage()">送出</button>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>即時同步：</strong>所有投票、留言、勾選都會即時同步到雲端，4 位旅伴看到的內容完全一樣！每 3 秒自動更新。
+  </div>
+</div>
+
+</div>
+
+<script>
+const API = 'https://jsonblob.com/api/jsonBlob/019e5535-58df-70f3-8afd-1ecb86d4e1e8';
+const avatarColors = { '志誠': '#e74c3c', '雅萍': '#3498db', '冠宇': '#2ecc71', '冠霖': '#f39c12' };
+let cloudData = { votes: {}, messages: [], checklist: {} };
+let syncing = false;
+let lastMsgCount = 0;
+
+function currentUser() { return document.getElementById('userName').value; }
+
+// ── Cloud sync ──
+async function cloudGet() {
+  try {
+    const r = await fetch(API, { headers: { 'Accept': 'application/json' } });
+    if (r.ok) cloudData = await r.json();
+  } catch(e) { console.warn('sync read failed', e); }
+}
+
+async function cloudPut() {
+  if (syncing) return;
+  syncing = true;
+  try {
+    await fetch(API, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(cloudData)
+    });
+  } catch(e) { console.warn('sync write failed', e); }
+  syncing = false;
+}
+
+// ── Section switching ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-bar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── Day card toggle ──
+function toggleDay(card) { card.classList.toggle('open'); }
+
+// ── Votes ──
+function vote(btn, e) {
+  e.stopPropagation();
+  const allBtns = [...document.querySelectorAll('.vote-btn')];
+  const idx = allBtns.indexOf(btn);
+  const user = currentUser();
+  if (!cloudData.votes[idx]) cloudData.votes[idx] = [];
+  const arr = cloudData.votes[idx];
+  const pos = arr.indexOf(user);
+  if (pos === -1) arr.push(user);
+  else arr.splice(pos, 1);
+  renderVotes();
+  cloudPut();
+}
+
+function renderVotes() {
+  const user = currentUser();
+  document.querySelectorAll('.vote-btn').forEach((btn, i) => {
+    const arr = cloudData.votes[i] || [];
+    btn.querySelector('.count').textContent = arr.length;
+    btn.classList.toggle('voted', arr.includes(user));
+    btn.title = arr.length ? arr.join('、') : '';
+  });
+}
+
+// ── Messages ──
+function sendMessage() {
+  const input = document.getElementById('messageInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const name = currentUser();
+  const now = new Date();
+  const timeStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  cloudData.messages.push({ name, text, time: timeStr });
+  renderMessages();
+  cloudPut();
+  input.value = '';
+}
+
+function renderMessages() {
+  const list = document.getElementById('messageList');
+  const existing = list.querySelectorAll('.message[data-idx]');
+  cloudData.messages.forEach((m, i) => {
+    if (list.querySelector(`[data-idx="${i}"]`)) return;
+    const initial = m.name.charAt(1);
+    const color = avatarColors[m.name] || '#95a5a6';
+    const div = document.createElement('div');
+    div.className = 'message';
+    div.dataset.idx = i;
+    div.innerHTML = `
+      <div class="avatar" style="background:${color}">${initial}</div>
+      <div class="bubble">
+        <div class="name">${m.name}</div>
+        ${m.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+        <div class="time-stamp">${m.time}</div>
+      </div>`;
+    list.appendChild(div);
+  });
+  if (cloudData.messages.length > lastMsgCount) {
+    list.scrollTop = list.scrollHeight;
+    lastMsgCount = cloudData.messages.length;
+  }
+}
+
+// ── Checklist ──
+function toggleDone(cb) {
+  const idx = [...document.querySelectorAll('.checklist input[type="checkbox"]')].indexOf(cb);
+  const user = currentUser();
+  if (!cloudData.checklist[idx]) cloudData.checklist[idx] = [];
+  const arr = cloudData.checklist[idx];
+  const pos = arr.indexOf(user);
+  if (pos === -1) arr.push(user);
+  else arr.splice(pos, 1);
+  renderChecklist();
+  cloudPut();
+}
+
+function renderChecklist() {
+  document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+    const arr = cloudData.checklist[i] || [];
+    cb.checked = arr.length > 0;
+    const span = cb.nextElementSibling;
+    span.classList.toggle('done', arr.length > 0);
+    const base = span.textContent.replace(/ ✓.+$/, '');
+    span.textContent = arr.length > 0 ? `${base} ✓ ${arr.join('、')}` : base;
+  });
+}
+
+// ── Polling ──
+async function poll() {
+  await cloudGet();
+  renderVotes();
+  renderMessages();
+  renderChecklist();
+}
+
+// ── Init ──
+(async () => {
+  await poll();
+  setInterval(poll, 3000);
+})();
+</script>
+
+</body>
+</html>
