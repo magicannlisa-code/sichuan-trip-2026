@@ -876,7 +876,7 @@
 </div>
 
 <script>
-const API = 'https://jsonblob.com/api/jsonBlob/019e5535-58df-70f3-8afd-1ecb86d4e1e8';
+const API = 'https://script.google.com/macros/s/AKfycbysRz6ZhiOZHrCnRZM0OKGFRZUL9J-VL-ceIZeC5iz6r7WxK8aKSKcf4czAherJlQPg/exec';
 const avatarColors = { '志誠': '#e74c3c', '雅萍': '#3498db', '冠宇': '#2ecc71', '冠霖': '#f39c12' };
 let cloudData = { votes: {}, messages: [], checklist: {} };
 let syncing = false;
@@ -887,7 +887,7 @@ function currentUser() { return document.getElementById('userName').value; }
 // ── Cloud sync ──
 async function cloudGet() {
   try {
-    const r = await fetch(API, { headers: { 'Accept': 'application/json' } });
+    const r = await fetch(API);
     if (r.ok) cloudData = await r.json();
   } catch(e) { console.warn('sync read failed', e); }
 }
@@ -897,8 +897,8 @@ async function cloudPut() {
   syncing = true;
   try {
     await fetch(API, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(cloudData)
     });
   } catch(e) { console.warn('sync write failed', e); }
